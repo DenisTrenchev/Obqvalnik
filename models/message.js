@@ -4,15 +4,19 @@ module.exports = (sequelize, DataTypes) =>{
 			type: DataTypes.STRING,
 			allowNull: false
 		},
-        sender: {
-            type: DataTypes.INTEGER,
-			allowNull: false
-        },
         reciever: {
             type: DataTypes.INTEGER,
 			allowNull: false
         }
 	});
+
+	Message.associate = models => {
+        Message.belongsTo(models.User, {
+            foreignKey: {
+                name: 'sender'
+            }
+        });
+    }
 
 	return Message;
 }

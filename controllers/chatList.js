@@ -12,7 +12,10 @@ router.get('/', helpers.checkNotAuthenticated, helpers.isAdmin, async (req, res)
         attributes: ['id', 'firstName', 'lastName'],
         where: {
             id: {
-                [Op.in]: db.sequelize.literal(`(SELECT m."reciever" FROM "Messages" m WHERE m."sender" = '${userId}')`)
+                [Op.in]: db.sequelize.literal(
+                    `(SELECT m."reciever" FROM "Messages" m WHERE m."sender" = '${userId}'
+                    UNION SELECT m."sender" FROM "Messages" m WHERE m."reciever" = '${userId}')`
+                )
             }
         }
 	});
