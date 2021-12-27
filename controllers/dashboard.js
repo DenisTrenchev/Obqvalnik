@@ -23,11 +23,6 @@ router.get('/', helpers.checkNotAuthenticated, helpers.isAdmin, async (req, res)
 
 	pictures = await db.Picture.findAll();
 
-	// listings.forEach(listing =>{
-	// 	console.log(listing.Category.name);
-	// 	console.log(listing.Picture.ListingId);
-	// });
-
 	res.render('dashboard', {
 		pictures: pictures,
 		listings: listings

@@ -22,9 +22,8 @@ const viewUserProfile = require('./controllers/viewUserProfile');
 const {editProfile, editProfileFunc} = require('./controllers/editProfile');
 const adminPanel = require('./controllers/adminPanel');
 const viewUserListings = require('./controllers/viewUserListings');
-// const {createNote, createNoteFunc} = require('./controllers/createNote');
-// const {editNote, editNoteFunc} = require('./controllers/editNote');
-// const viewUserNotes = require('./controllers/viewUserNotes');
+//const chat = require('./controllers/chat');
+const chatList = require('./controllers/chatList');
 //------------------------------------------------------------------------------
 app.set('view engine', 'ejs');
 
@@ -57,9 +56,8 @@ app.use('/dashboard/viewUserProfile', viewUserProfile);
 app.use('/users/profile/editProfile', editProfile);
 app.use('/adminPanel', adminPanel);
 app.use('/adminPanel/viewUserListings', viewUserListings);
-// app.use('/users/dashboard/createNote', createNote);
-// app.use('/users/dashboard/editNote', editNote);
-// app.use('/users/adminPanel/userNotes', viewUserNotes);
+//app.use('/dashboard/chat', chat);
+app.use('/dashboard/chatList', chatList);
 
 //DB test
 db.sequelize.authenticate()

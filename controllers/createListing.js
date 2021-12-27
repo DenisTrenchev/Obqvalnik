@@ -4,6 +4,7 @@ const router = express.Router();
 const { Connection } = require('pg');
 const helpers = require('../helpers/util');
 const multer = require('multer');
+const path = require('path');
 
 router.get('/', helpers.checkNotAuthenticated, helpers.isAdmin, async (req, res) =>{
 	categories = await db.Category.findAll()
@@ -38,16 +39,23 @@ async function addPicture(fileName, listingId){
 	};
 }
 
-var storage = multer.diskStorage({
+const storage = multer.diskStorage({
 	destination: function (request, file, callback) {
 		callback(null, './public/pictures/listingPictures');
 	},
 	filename: function (request, file, callback) {
-		callback(null, file.originalname)
+		callback(null, generateFileName(file.originalname))
 	}
 });
 
-var upload = multer({ storage: storage });
+const generateFileName = (fileName) => {
+	const extension = path.extname(fileName);
+	const baseName = path.basename(fileName, extension);
+
+	return baseName + '-' + Date.now() + extension;
+}
+
+const upload = multer({ storage: storage });
 
 router.post('/', upload.array('_pic'), async (req, res) => {
 	let {_listingTitle, _listingContent, _listingPrice, _category, _listingType, _pic} = req.body;
