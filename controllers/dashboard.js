@@ -6,6 +6,7 @@ const helpers = require('../helpers/util');
 const { Op } = require("sequelize");
 
 router.get('/', helpers.checkNotAuthenticated, helpers.isAdmin, async (req, res) =>{
+	categories = await db.Category.findAll();
 	listings = await db.Listing.findAll({
 		include: [{
 			model: db.Category,
@@ -25,38 +26,67 @@ router.get('/', helpers.checkNotAuthenticated, helpers.isAdmin, async (req, res)
 
 	res.render('dashboard', {
 		pictures: pictures,
-		listings: listings
+		listings: listings,
+		categories: categories
 	});
 });
 
 router.post('/', async (req, res) => {
-	let {_search} = req.body;
+	let {_search, _category} = req.body;
 
-	listings = await db.Listing.findAll({
-		where: {
-			[Op.or]: [
-				{title:{
-					[Op.like]: '%'+_search+'%'
-				}},
-				{content:{
-					[Op.like]: '%'+_search+'%'
-				}}
-			]
-		},
-		include: [{
-			model: db.Category,
-			attributes: ['id', 'name']
-		},{
-			model: db.ListingType,
-			attributes: ['id', 'name']
-		},{
-			model: db.Picture,
-			attributes: ['id', 'fileName']
-		},{
-			model: db.User
-		}]
-	});
-
+	if(_category == 'Choose category'){
+		listings = await db.Listing.findAll({
+			where: {
+				[Op.or]: [
+					{title:{
+						[Op.like]: '%'+_search+'%'
+					}},
+					{content:{
+						[Op.like]: '%'+_search+'%'
+					}}
+				]
+			},
+			include: [{
+				model: db.Category,
+				attributes: ['id', 'name'],
+			},{
+				model: db.ListingType,
+				attributes: ['id', 'name']
+			},{
+				model: db.Picture,
+				attributes: ['id', 'fileName']
+			},{
+				model: db.User
+			}]
+		});
+	}else{
+		listings = await db.Listing.findAll({
+			where: {
+				[Op.or]: [
+					{title:{
+						[Op.like]: '%'+_search+'%'
+					}},
+					{content:{
+						[Op.like]: '%'+_search+'%'
+					}}
+				]
+			},
+			include: [{
+				model: db.Category,
+				attributes: ['id', 'name'],
+				where: {id: _category}
+			},{
+				model: db.ListingType,
+				attributes: ['id', 'name']
+			},{
+				model: db.Picture,
+				attributes: ['id', 'fileName']
+			},{
+				model: db.User
+			}]
+		});
+	}
+	
 	pictures = await db.Picture.findAll();
 
 	// listings.forEach(listing =>{
