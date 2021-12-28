@@ -24,6 +24,7 @@ const adminPanel = require('./controllers/adminPanel');
 const viewUserListings = require('./controllers/viewUserListings');
 const {addMessage, addMessageFunc} = require('./controllers/chat');//chat
 const chatList = require('./controllers/chatList');
+const docs = require('./controllers/docs');
 //------------------------------------------------------------------------------
 app.set('view engine', 'ejs');
 
@@ -58,6 +59,7 @@ app.use('/adminPanel', adminPanel);
 app.use('/adminPanel/viewUserListings', viewUserListings);
 app.use('/dashboard/chat', addMessage);//chat
 app.use('/dashboard/chatList', chatList);
+app.use('/dashboard/docs', docs);
 
 //DB test
 db.sequelize.authenticate()
