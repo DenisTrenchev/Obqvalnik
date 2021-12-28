@@ -8,6 +8,8 @@ const url = require('url');
 router.get('/', helpers.checkNotAuthenticated, /*helpers.isAdmin,*/ async (req, res) =>{
 	var id = url.parse(req.url, true);
 	var iddata = id.query;
+	
+	const myId = req.user.id;
 
 	listing = await db.Listing.findOne({
         where: {id: iddata._listingId},
@@ -32,7 +34,8 @@ router.get('/', helpers.checkNotAuthenticated, /*helpers.isAdmin,*/ async (req, 
 
 	res.render('viewListing', {
 		pictures: pictures,
-		listing: listing
+		listing: listing,
+		myId: myId
 	});
 });
 

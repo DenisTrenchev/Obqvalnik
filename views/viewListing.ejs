@@ -100,15 +100,20 @@
 								value="<%=listing.User.id%>"
 							><%=listing.User.firstName%> <%=listing.User.lastName%></button>
 							</div>
-							<div class="col float-right">
-								<button 
-									class="btn btn-sm btn-warning float-right"
-									type="submit"
-									form="openChatForm" 
-									name="_recieverId" 
-									value="<%=listing.User.id%>"
-								>Chat</button>
-							</div>
+							<%if(myId != listing.User.id){%>
+								<div class="col float-right">
+									<button 
+										class="btn btn-sm btn-warning float-right"
+										type="submit"
+										form="openChatForm" 
+										name="_recieverId" 
+										value="<%=listing.User.id%>"
+									>Chat</button>
+								</div>
+							<%} else {%>
+								<input type="hidden"/>
+							<%}%>
+							
 						</div>
 						<div class="row text-muted">
 							<div class="col">
