@@ -81,6 +81,7 @@
 				</div>
 				<div class="card card-signin my-5">
 					<form id="viewForm" class="form-signin" action="/dashboard/viewUserProfile"></form>
+					<form id="openChatForm" class="form-signin" action="/dashboard/chat"></form>
 					<div class="card-body">
 						<h1 class="text-left font-weight-bold display-6"><%=listing.title%></h1>
 						<p>Price: <%=listing.price%> лв.</p>
@@ -89,13 +90,26 @@
 								<%=listing.content%>
 							</p>
 						</div>
-							<button 
+						<div class="row">
+							<div class="col float-right">
+								<button 
 								class="btn btn-sm btn-secondary"
 								type="submit"
 								form="viewForm" 
 								name="_userId" 
 								value="<%=listing.User.id%>"
 							><%=listing.User.firstName%> <%=listing.User.lastName%></button>
+							</div>
+							<div class="col float-right">
+								<button 
+									class="btn btn-sm btn-warning float-right"
+									type="submit"
+									form="openChatForm" 
+									name="_recieverId" 
+									value="<%=listing.User.id%>"
+								>Chat</button>
+							</div>
+						</div>
 						<div class="row text-muted">
 							<div class="col">
 								<p><b>Category:</b> <%=listing.Category.name%></p>

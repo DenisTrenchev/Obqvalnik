@@ -27,7 +27,6 @@ router.get('/', helpers.checkNotAuthenticated, helpers.isAdmin, async (req, res)
 		listings: listings,
         user: user
 	});
-	//res.render('dashboard');
 });
 
 router.post('/', async (req, res) => {

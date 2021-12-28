@@ -38,6 +38,63 @@
 						<p><b>Address:</b> <%=user.address%></p>
                     </div>
                 </div>
+				<div class="card card-signin my-5 text-white bg-dark mb-3">
+                    <h1 class="display-3 text-center">Listings</h1>
+                </div>
+				<% listings.forEach(listing => {%>
+					<form id="viewForm" class="form-signin" action="/dashboard/viewListing"></form>
+					<div class="card card-signin my-5">
+						<div class="card-body">
+							<div class="row">
+								<div class="col-md-auto">
+									<% var found = false %>
+									<% pictures.forEach(picture => { %>
+										<% if(listing.id == picture.ListingId && !found) { %>
+											<img 
+												src="../public/pictures/listingPictures/<%= picture.fileName %>"
+												height="150"
+												width="200"
+												class="rounded"
+											/>
+											<% found = true %>
+										<% } %>
+									<% }) %>
+								</div>
+								<div class="col">
+									<div class="row">
+										<div class="col-sm-auto">
+											<h5 class="card-title text-left font-weight-bold">
+												<p><%=listing.title%></p>
+											</h5>
+										</div>
+										<div class="col">
+											<p class="text-right"><%=listing.price%> лв.</p>
+											<p class="text-right"><%=listing.ListingType.name%></p>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col position-absolute bottom-0">
+											<p class="text-left"><%=user.address%></p>
+										</div>
+                                        <div class="col-md-auto position-absolute bottom-0 end-0">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <button 
+                                                        class="btn btn-sm btn-secondary"
+                                                        type="submit"
+                                                        form="viewForm" 
+                                                        name="_listingId" 
+                                                        value="<%=listing.id%>"
+                                                    >View</button>
+                                                </div>
+                                            </div>
+                                        </div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<% }) %>
 			</div>
 		</div>
 	</div>
