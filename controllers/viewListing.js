@@ -26,7 +26,6 @@ router.get('/', helpers.checkNotAuthenticated, /*helpers.isAdmin,*/ async (req, 
 		where: {ListingId: listing.id}
 	});
 
-	// console.log(listing.id);
 	pictures.forEach(picture =>{
 		console.log(picture.fileName);
 	});

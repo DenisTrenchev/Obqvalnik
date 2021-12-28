@@ -39,38 +39,52 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-9 mx-auto">
-                <form id="sendMessageForm" class="form-signin" action="/dashboard/chat" method="POST"></form>
-                <div id="here">
-                    <div class="card card-signin my-5">
-                        <div class="card-body">
-                            <% messages.forEach(message => {%>
-                                <div class="alert alert-secondary" role="alert">
-                                    <h3><%= message.content %></h3>
-                                    <div class="row">
-                                        <div class="col">
-                                            <p><%=message.updatedAt.substring(0, 8)%> <%=message.createdAt%></p>
-                                        </div>
-                                        <div class="col">
-                                            <p class="text-right"><%= message.User.firstName %> <%= message.User.lastName %></p>
-                                        </div>
+                <div class="card card-signin my-5">
+                    <div class="card-body">
+                        <div id="here">
+                        <% messages.forEach(message => {%>
+                            <div class="alert alert-secondary" role="alert">
+                                <h3><%= message.content %></h3>
+                                <div class="row">
+                                    <div class="col">
+                                        <p><%=message.updatedAt.substring(0, 8)%> <%=message.createdAt%></p>
+                                    </div>
+                                    <div class="col">
+                                        <p class="text-right"><%= message.User.firstName %> <%= message.User.lastName %></p>
                                     </div>
                                 </div>
-                            <% }) %>
+                            </div>
+                        <% }) %>
+                        </div>
+                        <form id="sendMessageForm" class="form-signin" action="/dashboard/chat" method="POST">
+                            <input
+                                type="hidden"
+                                id="sender"
+                                name="_sender"
+                                value="<%= senderId %>"
+                            />
+                            <input
+                                type="hidden"
+                                id="reciever"
+                                name="_reciever"
+                                value="<%= recieverID %>"
+                            />
                             <div class="input-group mb-3">
                                 <input 
                                     type="text" 
-                                    class="form-control" 
-                                    aria-label="Recipient's username" 
-                                    aria-describedby="basic-addon2"
+                                    class="form-control"
+                                    name="_messageContent"
                                 >
                                 <div class="input-group-append">
                                     <button 
-                                        class="btn btn-secondary" 
-                                        type="submit"  
-                                        form="sendMessageForm">Send message</button>
+                                        class="btn btn-secondary"
+                                        type="submit" 
+                                        name="_recieverId"
+                                        value="<%=recieverID%>"
+                                    >Send message</button>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
 			</div>

@@ -68,7 +68,7 @@ router.post('/', upload.array('_pic'), async (req, res) => {
 	})
 
 	for (const pic of req.files) {
-		await addPicture(pic.originalname, listing.id);
+		await addPicture(pic.filename, listing.id);
 	}
 
 	if(result.isValid == true){

@@ -70,7 +70,11 @@
 											</h5>
 										</div>
 										<div class="col">
-											<p class="text-right"><%=listing.price%> лв.</p>
+											<% if(!!listing.price) {%>
+												<p class="text-right"><%=listing.price%> лв.</p>
+											<%} else {%>
+												<p class="text-right"><%=listing.price%></p>
+											<%}%>
 											<p class="text-right"><%=listing.ListingType.name%></p>
 										</div>
 									</div>
