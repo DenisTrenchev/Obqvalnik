@@ -1,6 +1,7 @@
 body {
 	/*background-image: linear-gradient(to left bottom, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);*/
 	background-image: linear-gradient(to right top, #051937, #004d7a, #008793, #00bf72, #a8eb12);
+	/*background: linear-gradient(to top, #8e9eab, #eef2f3);*/
 	background-attachment: fixed;
 	background-repeat: no-repeat;
 }
