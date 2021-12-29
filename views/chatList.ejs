@@ -36,6 +36,9 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-9 mx-auto">
+				<div class="card card-signin my-5 text-white bg-dark mb-3">
+                    <h1 class="display-3 text-center">Chat list</h1>
+                </div>
 				<% userList.forEach(user => {%>
 					<form id="openChatForm" class="form-signin" action="/dashboard/chat"></form>
 					<div class="card card-signin my-5">
